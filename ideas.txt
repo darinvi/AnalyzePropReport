@@ -1,0 +1,8 @@
+- scrape the report
+- show each trade as a new row
+- create an intraday chart with the trade marked up
+- other stats on the whole data
+- change of trade vs change of index for the given period. Does movement of index while in a trade have predictive power?
+
+
+Start from extracting the data from the report.
