@@ -16,19 +16,14 @@ import math
 
 def cleanReportValues(lst):
     # Remove "Opened,Closed..." and "Equities..." rows as they are noise.
-    lst = [clean for clean in lst if clean[0] not in ("Opened","Equities")]
-    # Remove empty rows
-    no_empty = [no_nan for no_nan in lst if len(set(no_nan))>1]
-    # print(no_empty[:20])
     nan = lst[0][1]
-    nan_lst = [[no_nan for no_nan in aux if len(set(no_nan)) > 1] for aux in no_empty if len(set(aux))!=1]
-    # for i in range(20):
-    #     print(lst[i])
-    # print(nan == nan_lst[0][1])
-    # print(nan_lst[0][1])
-    print(nan_lst[:20])
+    lst = [clean for clean in lst if clean[0] not in ("Opened","Equities")]
+    # Remove empty rows as they only contain nan values
+    no_empty = [no_nan for no_nan in lst if len(set(no_nan))>1]
+    # Only leave date in rows that represent date of report (date,nan,nan...)
+    nan_lst = [nonan[0] if len(set(nonan))==2 else nonan for nonan in no_empty]
+    return nan_lst
 
-    return lst
 
 # def intradayTradesOnly(lst):
     # A trade is an intraday trade if it is opened and closed in the same day. The way the report is shown is, a trade is reported at the day of closing.
