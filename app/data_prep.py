@@ -21,21 +21,20 @@ def cleanReportValues(lst):
     # Remove empty rows as they only contain nan values
     no_empty = [no_nan for no_nan in lst if len(set(no_nan))>1]
     # Only leave date in rows that represent date of report (date,nan,nan...)
-    nan_lst = [nonan[0] if len(set(nonan))==2 else nonan for nonan in no_empty]
+    nan_lst = [[nonan[0]] if len(set(nonan))==2 else nonan for nonan in no_empty]
     return nan_lst
 
 
-# def intradayTradesOnly(lst):
+def intradayTradesOnly(lst):
     # A trade is an intraday trade if it is opened and closed in the same day. The way the report is shown is, a trade is reported at the day of closing.
     # Based on that, a trade is intraday if the date of the report is the same the value in the "Opened column" 
-    # print(lst[:20])
-    # intraday_trades = []
-    # date_today = ''
-    # for row in lst:
-    #     if nan in row and len(set(row))==2:
-    #         date_today = row[0]
-    #     el
+    intraday_trades = []
+    date_today = ''
+    for element in lst:
+        if len(element)==1:
+            date_today = element[0]
+            print(date_today)
 
 trades = cl.readCSV()
 trades = cleanReportValues(trades)
-# intradayTradesOnly(trades)
+intradayTradesOnly(trades)
